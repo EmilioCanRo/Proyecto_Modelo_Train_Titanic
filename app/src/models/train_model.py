@@ -6,7 +6,7 @@ from cloudant.query import Query
 import time
 
 
-def training_pipeline(path, model_info_db_name="models-db"):
+def training_pipeline(path, model_info_db_name="database-hem"):
     """
     Función para gestionar el pipeline completo de entrenamiento
     del modelo.
@@ -80,7 +80,7 @@ def training_pipeline(path, model_info_db_name="models-db"):
     put_best_model_in_production(metrics_dict, model_info_db_name)
 
 
-def save_model(obj, name, timestamp, bucket_name="models-uem"):
+def save_model(obj, name, timestamp, bucket_name="cos-uem-hem"):
     """
     Función para guardar el modelo en IBM COS
 
@@ -196,5 +196,5 @@ def load_model_config(db_name):
         dict. Documento con la configuración del modelo.
     """
     db = client.get_database(db_name)
-    query = Query(db, selector={"_id": {"$eq": "model_config"}})
+    query = Query(db, selector={"_id": {"$eq": "model-hem"}})
     return query()["docs"][0]
